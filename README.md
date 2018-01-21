@@ -47,8 +47,8 @@ This adds **all** files to be tracked
 4. Pull latest 
 `git pull origin master`
 
-
-
+### Merge Conflict (Please read)
+- https://www.git-tower.com/learn/git/ebook/en/command-line/advanced-topics/merge-conflicts
 
 ### References:
 - https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository
