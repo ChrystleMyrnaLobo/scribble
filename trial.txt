@@ -4,6 +4,7 @@ xampp
 Atom
 - platformio-ide-terminal: Terminal within Atom
 Anaconda - python libraries for ML
+Matlab
 
 Create launcher 
 gnome-desktop-item-edit --create-new ~/Desktop
