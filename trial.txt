@@ -3,6 +3,7 @@ eclipse oxygen + java
 xampp
 Atom
 - platformio-ide-terminal: Terminal within Atom
+- atom-beautify : auto indent HTML, CSS, JS etc
 Anaconda - python libraries for ML
 Matlab
 
