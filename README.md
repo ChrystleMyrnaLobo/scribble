@@ -38,7 +38,7 @@ Copy the URL (It will be something like https://github.com/path/to/repo')
 
 ## Working with the local repo
 1. After making changes, Add the files in your local repository. This stages them for the commit.
-`git add *`
+`git add .`
 This adds **all** files to be tracked
 2. Now commit the files on the staging area. *As a convention, commit after making meaniful changes (like fixed bug, added feature), even if it is a one code line change*
 `git commit -m "Initial Commit"`
