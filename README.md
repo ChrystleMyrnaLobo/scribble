@@ -37,6 +37,8 @@ Copy the URL (It will be something like https://github.com/path/to/repo')
 `git remote -v`
 
 ## Working with the local repo
+To discard all local changes. `git reset --hard origin/master`.
+**OR**
 1. After making changes, Add the files in your local repository. This stages them for the commit.
 `git add .`
 This adds **all** files to be tracked
