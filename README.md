@@ -10,7 +10,7 @@
 4. Set your Git email for every repository on your computer
 `git config --global user.email "github-account@gmail.com"`
 
-## Case #1 GitHub Repo to Local
+## Case #1 Remote to Local i.e. Get a GitHub Repo to your local sytem
 If you want to get a copy of an existing Git repository — for example, a project you’d like to contribute to.
 1. Open a terminal and go to folder where you want to download the repo
 `cd /path/to/folder`
@@ -21,7 +21,7 @@ Copy the URL (It will be something like https://github.com/path/to/repo')
 `git clone https://github.com/path/to/repo`
 This creates a new subdirectory which has the repo
 
-## Case #2 Local Git Repo to GitHub Repo
+## Case #2 Local to Remote i.e. Sync repo on your local with GitHub
 If you have a project directory that is currently not under version control and you want to start controlling it with Git
 1. Open a terminal and go to folder 
 `cd /path/to/folder`
