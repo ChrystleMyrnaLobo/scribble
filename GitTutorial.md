@@ -1,5 +1,5 @@
 # Getting started with Git Version Control *(Assuming you have a GitHub account)*
-
+Disclaimer: This is not exhaustive, only for hitchhiking
 ### Setup git
 1. Download git
 `sudo get-apt install git`
