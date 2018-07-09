@@ -1,7 +1,9 @@
 	#!/bin/bash
-
-	proxy_add=https://proxy61.iitd.ac.in/cgi-bin/proxy.cgi
-
+	
+	# proxy_add=https://proxy61.iitd.ac.in/cgi-bin/proxy.cgi
+	#For mtech
+	proxy_add=https://proxy62.iitd.ac.in/cgi-bin/proxy.cgi
+	#FILL THIS 
 	username="";
 	password="";
 
