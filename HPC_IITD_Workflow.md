@@ -16,15 +16,14 @@ cp /home/apps/skeleton/.bashrc $HOME/.bashrc`
 cp /home/apps/skeleton/.bash_profile $HOME/.bash_profile
 ```
 
-### Internet access
-- Admin access is not provided for HPC users. So we need to setup proxy for internet access everytime by 
+### Internet access from login node
+- Use CA certificate `export SSL_CERT_FILE=$HOME/mycerts/CCIITD-CA.crt`
+- Proxy login `lynx https://proxy62.iitd.ernet.in/cgi-bin/proxy.cgi`
+- Log in to HPC to same login node. Set env variables
 ```
 export http_proxy="http://10.10.78.62:3128/"
 export https_proxy="https://10.10.78.62:3128/"
 ```
-- Use CA certificate `export SSL_CERT_FILE=~/Utils/CCIITD-CA.crt`
-- One Time:  Download script `proxy.sh` (from this repo) for proxy login. Edit the file to add you login credentials and check the proxy hostname. Transfer to the HPC remote machine. Change file permission `chmod 755 proxy.sh`.
-- Run in the background `./proxy.sh &`
 
 ## 3. Load softwares
 ### A. Use HPC-maintained software
