@@ -1,4 +1,4 @@
-# Setup environment for TensorFlow Objection detection for GPU (on IITD HPC)
+# Setup environment for TensorFlow Objection detection API for GPU (or IITD HPC)
 
 ## LabelImg
 - Used for annotation according to PASCAL VOC standard
@@ -32,26 +32,16 @@ sudo chwon -R [user] /usr/local/include/google
 ```
 
 ### IITD HPC (without admin access)
-
-### Tensorflow
-- Due to some [issue](https://github.com/tensorflow/tensorflow/issues/17629), and modules doesn't have Cuda 9.0, I'm using Cuda 8.0 for TensorFlow 1.4.
-- Cython is an optimising static compiler. `conda install cython`
-#### CUDA
-- CUDA is a parallel computing platform and application programming interface model created by Nvidia
-- Use cuda from available modules. Choose the cuda version from `module avail 2> >(grep cuda)`.
-- Load cuda as `module load compiler/cuda/8.0/compilervars`.
+- Find the module from `module keyword tensorflow` and load as `load module apps/tensorflow/1.5.0/gpu`.
+- We need cuda, cuDNN, python and tensorflow for Object detection API
+-- CUDA is a parallel computing platform and application programming interface model created by Nvidia
+-- The NVIDIA CUDA Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. 
 - Check install location of CUDA tootkit `nvcc --version` and check if it is added in the required environment variables (pretty print) 
 ```
 sed 's/:/\n/g' <<< "$PATH"
 sed 's/:/\n/g' <<< "$LD_LIBRARY_PATH"
 ```
-#### cuDNN
-- The NVIDIA CUDA Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. 
-- Pick the cudnn version from `module avail 2> >(grep cudnn)`. Load it as `module load lib/cudnn/7.0.3/precompiled`
-
-#### Tensorflow
-- Activate virtual environment `conda activate py35`
-- Install tensorflow gpu. `pip install --ignore-installed --upgrade tensorflow-gpu==1.4`
+- Install protobuf on Ubuntu as above
 
 ### Reference: 
 - https://conda.io/miniconda.html
