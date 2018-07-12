@@ -5,7 +5,6 @@ Disclaimer: This is very limited tutorial based on what I needed to get started.
 
 ## 1. Login via Kerberos (intranet only)
 - Open new terminal, `ssh mcs991234@hpc.iitd.ac.in`
-- You'll see prompt `-bash-4.1$`. Type command `bash`
 - Current working directory (command `pwd`) should be `/home/cse/mtech/mcs991234`
 
 ## 2. Set up environment and internet access
@@ -32,6 +31,7 @@ export https_proxy="https://10.10.78.62:3128/"
 - For more python packages (like numpy, pandas etc), use a suite or individually load. Loading a suite for python3 by `module load pythonpackages/3.6.0/ucs4/gnu/suite1`
 
 ### B. Download from the internet
+- These are only for the ones which do not require admin access.
 - Example: Download minconda setup script from the site (`Miniconda3-latest-Linux-x86_64.sh` and run `bash Miniconda3-latest-Linux-x86_64.sh`
 
 ## 4. Transfer files from local to remote
