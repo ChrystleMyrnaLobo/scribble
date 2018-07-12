@@ -4,6 +4,29 @@
 - Used for annotation according to PASCAL VOC standard
 https://github.com/tzutalin/labelImg
 
+## On project server
+- Refer [tensorflow object detection api setup](http://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html#tensorflow-gpu)
+- To install protobuf on Ubuntu
+```
+# Make sure you grab the latest version
+curl -OL https://github.com/google/protobuf/releases/download/v3.2.0/protoc-3.2.0-linux-x86_64.zip
+
+# Unzip
+unzip protoc-3.2.0-linux-x86_64.zip -d protoc3
+
+# Move protoc to /usr/local/bin/
+sudo mv protoc3/bin/* /usr/local/bin/
+
+# Move protoc3/include to /usr/local/include/
+sudo mv protoc3/include/* /usr/local/include/
+
+# Optional: change owner
+sudo chwon [user] /usr/local/bin/protoc
+sudo chwon -R [user] /usr/local/include/google
+```
+
+## IITD HPC (without admin access)
+
 ### Conda 
 - Download latest minconda setup script from the site (say, `Miniconda3-latest-Linux-x86_64.sh` and run `bash Miniconda3-latest-Linux-x86_64.sh`
 - One Time Create python env for all python 3 libraries `conda create -n py35 python=3.5`
@@ -33,3 +56,4 @@ sed 's/:/\n/g' <<< "$LD_LIBRARY_PATH"
 - https://conda.io/miniconda.html
 - http://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html#tensorflow-gpu
 - https://www.pyimagesearch.com/2017/09/27/setting-up-ubuntu-16-04-cuda-gpu-for-deep-learning-with-python/
+- https://gist.github.com/sofyanhadia/37787e5ed098c97919b8c593f0ec44d8
