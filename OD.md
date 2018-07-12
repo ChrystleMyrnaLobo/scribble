@@ -1,10 +1,16 @@
 # Setup environment for TensorFlow Objection detection for GPU (on IITD HPC)
 
-### LabelImg
+## LabelImg
 - Used for annotation according to PASCAL VOC standard
 https://github.com/tzutalin/labelImg
 
-## On project server
+## Conda 
+- Download latest minconda setup script from the site (say, `Miniconda3-latest-Linux-x86_64.sh` and run `bash Miniconda3-latest-Linux-x86_64.sh`
+- One Time Create python env for all python libraries used in the project `conda create -n py35 python=3.5`
+- Activate the env, `source activate py35` and deactivate env by `source deactivate`
+
+## Tensorflow
+### On project server
 - Refer [tensorflow object detection api setup](http://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html#tensorflow-gpu)
 - To install protobuf on Ubuntu
 ```
@@ -25,12 +31,7 @@ sudo chwon [user] /usr/local/bin/protoc
 sudo chwon -R [user] /usr/local/include/google
 ```
 
-## IITD HPC (without admin access)
-
-### Conda 
-- Download latest minconda setup script from the site (say, `Miniconda3-latest-Linux-x86_64.sh` and run `bash Miniconda3-latest-Linux-x86_64.sh`
-- One Time Create python env for all python 3 libraries `conda create -n py35 python=3.5`
-- Activate the env, `source activate py35` and deactivate env by `source deactivate`
+### IITD HPC (without admin access)
 
 ### Tensorflow
 - Due to some [issue](https://github.com/tensorflow/tensorflow/issues/17629), and modules doesn't have Cuda 9.0, I'm using Cuda 8.0 for TensorFlow 1.4.
