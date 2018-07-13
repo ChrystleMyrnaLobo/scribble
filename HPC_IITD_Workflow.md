@@ -11,7 +11,7 @@ Disclaimer: This is very limited tutorial based on what I needed to get started.
 ### Default user environment
 Use the default user environment provided by HPC
 ```
-cp /home/apps/skeleton/.bashrc $HOME/.bashrc`
+cp /home/apps/skeleton/.bashrc $HOME/.bashrc
 cp /home/apps/skeleton/.bash_profile $HOME/.bash_profile
 ```
 
@@ -50,7 +50,7 @@ export https_proxy="https://10.10.78.62:3128/"
 - Make script executable `chmod +x pbsbatch.sh`
 - Submit script by command `qsub pbsbatch.sh`. This return `653106.hn1.hpc.iitd.ac.in` where 653106 is the Job ID.
 
-## Check status of job
+### Check status of job
 - Check the status of the job `qstat -u mcs991234`
 
 ### Reference:
