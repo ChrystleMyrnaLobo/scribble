@@ -40,6 +40,19 @@ export https_proxy="https://10.10.78.62:3128/"
 - Check the transfer at remote by `ls ~/dataset/cat`
 - Reverse steps to transfer from remote to local machine
 
+## 5. Use PBS
+- HPC uses PBS (portable batch system) for ditributed workload management. PBS accepts an executable shell script (aka job).
+### Create job
+- Create a file `pbsbatch.sh` as [pbsbatch.sh](https://github.com/ChrystleMyrnaLobo/Trial/blob/master/pbsbatch.sh). Here showTFVersion.py is an executable python file.
+- Note the `qsub` options are mentioned in the shell script itself, to make a clean command line command.
+
+### Submit job
+- Make script executable `chmod +x pbsbatch.sh`
+- Submit script by command `qsub pbsbatch.sh`. This return `653106.hn1.hpc.iitd.ac.in` where 653106 is the Job ID.
+
+## Check status of job
+- Check the status of the job `qstat -u mcs991234`
+
 ### Reference:
 - http://supercomputing.iitd.ac.in/?access
-- https://hpcc.usc.edu/gettingstarted/
+- http://supercomputing.iitd.ac.in/?pbs
