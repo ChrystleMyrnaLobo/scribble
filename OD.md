@@ -31,17 +31,21 @@ sudo chwon [user] /usr/local/bin/protoc
 sudo chwon -R [user] /usr/local/include/google
 ```
 
-### IITD HPC (without admin access)
+### IITD HPC 
+These steps will be done during job (Note: Write a script to do this)
 - Find the module from `module keyword tensorflow` and load as `load module apps/tensorflow/1.5.0/gpu`.
 - We need cuda, cuDNN, python and tensorflow for Object detection API
--- CUDA is a parallel computing platform and application programming interface model created by Nvidia
--- The NVIDIA CUDA Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks. 
+- CUDA is a parallel computing platform and application programming interface model created by Nvidia
+- The NVIDIA CUDA Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks.
 - Check install location of CUDA tootkit `nvcc --version` and check if it is added in the required environment variables (pretty print) 
 ```
 sed 's/:/\n/g' <<< "$PATH"
 sed 's/:/\n/g' <<< "$LD_LIBRARY_PATH"
 ```
-- Install protobuf on Ubuntu as above
+- Find and load protobuf `module load apps/protobuf/3.2.0/gnu`
+- Protocol Buffers (protobuf) are Google's language-neutral, platform-neutral, extensible mechanism for serializing structured data.
+- Find and load Pillow for PIL `module load pythonpackages/2.7.13/pillow/5.1.0/gnu`
+
 
 ### Reference: 
 - https://conda.io/miniconda.html
