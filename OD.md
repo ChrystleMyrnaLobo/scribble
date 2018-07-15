@@ -33,7 +33,7 @@ sudo chwon -R [user] /usr/local/include/google
 
 ### IITD HPC 
 These steps will be done during job (Note: Write a script to do this)
-- Find the module from `module keyword tensorflow` and load as `load module apps/tensorflow/1.5.0/gpu`.
+- Find the module from `module keyword tensorflow` and load as `module load apps/tensorflow/1.5.0/gpu`.
 - We need cuda, cuDNN, python and tensorflow for Object detection API
 - CUDA is a parallel computing platform and application programming interface model created by Nvidia
 - The NVIDIA CUDA Deep Neural Network library (cuDNN) is a GPU-accelerated library of primitives for deep neural networks.
