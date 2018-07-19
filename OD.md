@@ -67,3 +67,48 @@ ssh -N -f -L localhost:8888:localhost:8889 remote_user@remote_host
 - https://gist.github.com/sofyanhadia/37787e5ed098c97919b8c593f0ec44d8
 - https://coderwall.com/p/ohk6cg/remote-access-to-ipython-notebooks-via-ssh
 - https://help.ubuntu.com/stable/ubuntu-help/nautilus-connect.html.en
+
+
+# Custom object detector training
+### Setup folders
+In a new folder for the dataset, set up workspace as follows
+- Data: Contain the `.csv` and TFRecord `.record` for train and validation set.
+- Images: Contains the images 
+- preTrainModel: Unziped content of the model chosen from model zoo 
+- training: The checkpoints generated during training will be stored here.
+- Copy `train.py`, `eval.py`, `export_inference_grap.py` from `model/research/object_detection/` to the folder
+
+### Configure training pipeline
+- Create `label_map.pbtxt` in Data folder as (start index from 1)
+```
+item {
+    id: 1
+    name: 'dog'
+}
+item {
+    id: 2
+    name: 'cow'
+}
+```
+- Copy the pipeline config `/master/research/object_detection/samples/configs/ssd_mobilenet_v1_coco.config` to training folder. Edit 
+  - num_classes : as per label map file
+  - fine_tune_checkpoint : to `model.ckpt` in preTrainedModel
+  - train_input_reader, eval_input_reader : Path to training TFRecord file and label map file
+  
+### Run
+- To run 
+```
+python train.py --logtostderr \
+--train_dir=training/ \
+--pipeline_config_path=training/ssd_inception_v2_coco.config
+```
+Ctrl+C to stop.
+- To vizualize training `tensorboard --logdir=training\`. Open `http://localhost:6006`.
+- Choose the appropriate checkpoint here 13302 and export model
+```
+python export_inference_graph.py \
+--input_type image_tensor \
+--pipeline_config_path training/ssd_inception_v2_coco.config \
+--trained_checkpoint_prefix training/model.ckpt-13302 \
+--output_directory trained-inference-graphs/output_inference_graph_v1.pb
+```
