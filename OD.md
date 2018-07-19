@@ -60,12 +60,10 @@ ssh -N -f -L localhost:8888:localhost:8889 remote_user@remote_host
 - `-N` tells SSH that no remote commands will be executed
 - Open browser to `localhost:8888`. Need to open with token for thr first time
 
-## Browse files on server
-I am working with a GPU server, HPC server and my local machine. I log the program runs output and errors. So I'd ofter `ssh` just to check the files, which was a bit cumbersome after a time. I realized this late, but there is a way to browse files on server via the linux file browser [here](https://help.ubuntu.com/stable/ubuntu-help/nautilus-connect.html.en)
-
 ### Reference: 
 - https://conda.io/miniconda.html
 - http://tensorflow-object-detection-api-tutorial.readthedocs.io/en/latest/install.html#tensorflow-gpu
 - https://www.pyimagesearch.com/2017/09/27/setting-up-ubuntu-16-04-cuda-gpu-for-deep-learning-with-python/
 - https://gist.github.com/sofyanhadia/37787e5ed098c97919b8c593f0ec44d8
 - https://coderwall.com/p/ohk6cg/remote-access-to-ipython-notebooks-via-ssh
+- https://help.ubuntu.com/stable/ubuntu-help/nautilus-connect.html.en
