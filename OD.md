@@ -86,7 +86,7 @@ ssh -N -f -L localhost:8888:localhost:8889 remote_user@remote_host
 In a new folder for the dataset, set up workspace as follows
 - Data: Contain the `.csv` and TFRecord `.record` for train and validation set.
 - Images: Contains the images 
-- preTrainModel: Unziped content of the model chosen from model zoo 
+- preTrainModel: Unziped content of the model chosen from model zoo  `tar -xzvf ssd_mobilenet_v1_coco.tar.gz`
 - training: The checkpoints generated during training will be stored here.
 - Copy `train.py`, `eval.py`, `export_inference_grap.py` from `model/research/object_detection/` to the folder
 
@@ -115,8 +115,17 @@ python train.py --logtostderr \
 --pipeline_config_path=training/ssd_inception_v2_coco.config
 ```
 Ctrl+C to stop.
-- To vizualize training `tensorboard --logdir=training\`. Open `http://localhost:6006`.
-- Choose the appropriate checkpoint here 13302 and export model
+- To visualize training `tensorboard --logdir=training\`. Open `http://localhost:6006`.
+- Evaluate model
+```
+python eval.py --logtostderr \
+--pipeline_config_path=training/ssd_inception_v2_coco.config \
+--checkpoint_dir=training/ \
+--eval_dir=eval
+```
+- To visualize
+### Export the model
+- Choose the appropriate checkpoint (here 13302) and export model
 ```
 python export_inference_graph.py \
 --input_type image_tensor \
@@ -124,3 +133,8 @@ python export_inference_graph.py \
 --trained_checkpoint_prefix training/model.ckpt-13302 \
 --output_directory trained-inference-graphs/output_inference_graph_v1.pb
 ```
+- In the object detection code, change MODEL_NAME, PATH_TO_LABELS (path to label map file)  and NUM_CLASSES. Then run prediction
+
+### References
+- https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10#4-generate-training-data
+- https://becominghuman.ai/tensorflow-object-detection-api-tutorial-training-and-evaluating-custom-object-detector-ed2594afcf73
