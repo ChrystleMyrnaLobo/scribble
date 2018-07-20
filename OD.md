@@ -46,6 +46,18 @@ sed 's/:/\n/g' <<< "$LD_LIBRARY_PATH"
 - Protocol Buffers (protobuf) are Google's language-neutral, platform-neutral, extensible mechanism for serializing structured data.
 - Find and load Pillow for PIL `module load pythonpackages/2.7.13/pillow/5.1.0/gnu`
 
+## Coco API
+- Clone the [cocoapi](https://github.com/cocodataset/cocoapi) 
+- Ensure cython is present. Install the API
+```
+$ cd coco/PythonAPI
+$ make
+$ sudo make install
+$ sudo python setup.py install
+```
+- Install dependecies, if not present
+- Add this folder on `$PYTHONPATH`. In `~/.bashrc` add `/home/chrystle/MTP/cocoapi/PythonAPI`
+
 ## Jupyter 
 ### Remote access to jupyter notebook
 - On remote server, start Jupyter server (`--no-browser` for not opening browser) on a desired port (`--port=XXXX`) here 8889 
