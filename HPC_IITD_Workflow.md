@@ -17,8 +17,8 @@ cp /home/apps/skeleton/.bash_profile $HOME/.bash_profile
 
 ### Internet access from login node
 - Use CA certificate `export SSL_CERT_FILE=$HOME/mycerts/CCIITD-CA.crt`
-- Proxy login `lynx https://proxy62.iitd.ernet.in/cgi-bin/proxy.cgi`
-- Log in to HPC to same login node. Set env variables
+- Proxy login `lynx https://proxy62.iitd.ernet.in/cgi-bin/proxy.cgi` or open `firefox` and login to proxy.
+- Log in to HPC to *same* login node. Set env variables
 ```
 export http_proxy="http://10.10.78.62:3128/"
 export https_proxy="https://10.10.78.62:3128/"
