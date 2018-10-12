@@ -29,6 +29,9 @@ sudo mv protoc3/include/* /usr/local/include/
 # Optional: change owner
 sudo chwon [user] /usr/local/bin/protoc
 sudo chwon -R [user] /usr/local/include/google
+
+# From TensorFlow/models/research/
+protoc object_detection/protos/*.proto --python_out=.
 ```
 
 ### IITD HPC 
