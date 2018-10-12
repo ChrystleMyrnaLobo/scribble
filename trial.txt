@@ -2,7 +2,7 @@ git
 eclipse oxygen + java
 xampp
 Atom
-- platformio-ide-terminal: Terminal within Atom
+- platformio-ide-terminal: Terminal within Atom (https://github.com/atom/apm#behind-a-firewall)
 - atom-beautify : auto indent HTML, CSS, JS etc
 Anaconda - python libraries for ML
 Matlab
