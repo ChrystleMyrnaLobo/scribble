@@ -49,6 +49,11 @@ This adds **all** files to be tracked
 4. Pull latest 
 `git pull origin master`
 
+## Tell git to ignore some file
+Used to ignore log files, build files `.pyc`, `.o` etc
+- At the root of your repo make `.gitignore` file and add a list of the file to be ignored. 
+- Some Git ignore patterns https://www.atlassian.com/git/tutorials/saving-changes/gitignore
+
 ### Merge Conflict (Please read)
 - https://www.git-tower.com/learn/git/ebook/en/command-line/advanced-topics/merge-conflicts
 
