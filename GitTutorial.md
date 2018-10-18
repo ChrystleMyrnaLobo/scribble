@@ -32,7 +32,7 @@ This creates a new subdirectory named .git that contains all of your necessary r
 'Clone or Download > Clone with HTTPS'
 Copy the URL (It will be something like https://github.com/path/to/repo')
 3. Setup remote which is where your local repo will be pushed and fetched
-`git remote add origin https://github.com/path/to/repo`
+`git remote add origin https://github.com/path/to/repo`. To update the url for `origin` use `git remote set-url origin` instead.
 4. Check the remote
 `git remote -v`
 
