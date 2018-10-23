@@ -26,7 +26,7 @@ export https_proxy="https://10.10.78.62:3128/"
 
 ## 3. Load softwares
 ### A. Use HPC-maintained software
-- Find path to the required module using command (lists available modules) `module avail`. The list from standard error and can be redirected to a file, if required, using `module avail 2> modules.list`.
+- Find path to the required module using command (lists available modules) `module avail`. Search module as `module keyword tensorflow`/
 - To load python in the environment, (use path, here python3), `module load compiler/python/3.6.0/ucs4/gnu/447`
 - For more python packages (like numpy, pandas etc), use a suite or individually load. Loading a suite for python3 by `module load pythonpackages/3.6.0/ucs4/gnu/suite1`
 
