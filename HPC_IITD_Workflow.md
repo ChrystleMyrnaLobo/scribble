@@ -14,6 +14,15 @@ Use the default user environment provided by HPC
 cp /home/apps/skeleton/.bashrc $HOME/.bashrc
 cp /home/apps/skeleton/.bash_profile $HOME/.bash_profile
 ```
+### Link to scratch folder (with 100TB)
+```
+ln -s $SCRATCH $HOME/scratch
+```
+### Make your folder inaccessible to all
+```
+chmod og-rx $SCRATCH
+chmod og-rx $HOME 
+```
 
 ### Internet access from login node
 - Use CA certificate `export SSL_CERT_FILE=$HOME/mycerts/CCIITD-CA.crt`
