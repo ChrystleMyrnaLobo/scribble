@@ -1,5 +1,5 @@
 # Proxy setting for IIT D intranet
-Word of advice : Dont not use special characters in passwords, because escaping may not work always :(
+Word of advice : Do not use special characters (@,:,.,/) in passwords, because escaping may not work always :(
 
 ## Linux machine with admin access
 - In `/etc/environment` add the following lines (62 for mtech)
@@ -17,13 +17,19 @@ Acquire::http::proxy "http://10.10.78.62:3128/";
 - In `~/.bashrc`, add lines
 ```
 export http_proxy="http://10.10.78.62:3128/"
-export http_proxy="http://10.10.78.62:3128/"
+export https_proxy="https://10.10.78.62:3128/"
 ```
 
 ## Proxy for conda
 ```
 conda config --set proxy_servers.http http://id:pw@address:port
 conda config --set proxy_servers.https https://id:pw@address:port
+```
+
+## Proxy for pip
+Using package url
+```
+pip install --ignore-installed --upgrade packageURL --proxy="http://10.10.78.62:3128/"
 ```
 
 ## Proxy for git
