@@ -36,3 +36,11 @@ pip install --ignore-installed --upgrade packageURL --proxy="http://10.10.78.62:
 ```
 git config --global http.proxy http://proxyuser:proxypwd@proxy.server.com:8080
 ```
+
+## Proxy for make
+`make` use either `curl` or `wget`. Find the command which downloads and add the proxy to it.
+
+## Proxy for curl
+```
+curl -x http://10.10.78.62:3128 http://url
+```
