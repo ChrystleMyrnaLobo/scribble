@@ -16,8 +16,10 @@ Acquire::http::proxy "http://10.10.78.62:3128/";
 
 - In `~/.bashrc`, add lines
 ```
-export http_proxy="http://10.10.78.62:3128/"
-export https_proxy="https://10.10.78.62:3128/"
+export HTTP_PROXY="http://10.10.78.62:3128/"
+export HTTPS_PROXY="https://10.10.78.62:3128/"
+export http_proxy=${HTTP_PROXY}
+export https_proxy=${HTTPS_PROXY}
 ```
 
 ## Proxy for conda
