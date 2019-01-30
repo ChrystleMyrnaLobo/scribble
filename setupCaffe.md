@@ -2,8 +2,9 @@
 - Clone [ssd] as ssd_caffe. This is forked from BVLC/caffe.
 - `git checkout caffe` on ssd_caffe
 - Build the code using cmake as below.
-
 - Clone [mobilenet ssd] 
+ - Uncomment `engine: CAFFE` under `convolution_param` in every convolution layers in `*.prototxt`
+ - Run `demo.py` 
 
 [ssd]: https://github.com/weiliu89/caffe/tree/ssd
 [mobilenet ssd]: https://github.com/chuanqi305/MobileNet-SSD
