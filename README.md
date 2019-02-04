@@ -5,3 +5,4 @@ This repo is has some scribbles for common tasks I need. (Adventurous hitchhiker
 - `HPC_IITD_Workflow` consolidated step by step guide to use HPC at IITD. (In case, my future self forgets)
 - `OD.md` to setup Tensorflow object detection API on ubuntu
 - `pbsbatch.sh` sample script to submit to PBS of IITD HPC
+- `setupCaffe.sh` to setup caffe SSD mobilenet on ubuntu w/o sudo permission
