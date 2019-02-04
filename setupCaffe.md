@@ -1,16 +1,14 @@
-## Setup SSD MobileNet caffe
-- Clone [ssd] as ssd_caffe. This is forked from BVLC/caffe.
+# Caffe SSD MobileNet w/o root access
+
+## Setup CUDA
+- Setup cuda and cudnn [cuda]
+
+## Setup SSD (a caffe fork)
+- Clone [ssd] as ssd_caffe. This repo is forked from BVLC/caffe.
 - `git checkout caffe` on ssd_caffe
 - Build the code using cmake (refer the below section).
-- Clone [mobilenet ssd] 
- - Uncomment `engine: CAFFE` under `convolution_param` in every convolution layers in `*.prototxt`
- - Run `demo.py` 
 
-[ssd]: https://github.com/weiliu89/caffe/tree/ssd
-[mobilenet ssd]: https://github.com/chuanqi305/MobileNet-SSD
-
-## Caffe + Conda + Ubuntu + GPU + No admin access
-Setup cuda and cudnn w/o admin acess [cuda]  
+## Set up Caffe
 Setup [caffe]. Some changes I had to make
 - gcc-5.x.x requires -std=c++11, but the boost lib in Debian system are built without such an option. So you need to build your own version of boost. [build boost]
   - Find the version of the current boost lib. `conda list boost`
@@ -22,6 +20,13 @@ Setup [caffe]. Some changes I had to make
 - Modify `cmake` command as  
   `cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH -DCUDA_CUDART_LIBRARY=$CUDA_HOME/lib64/libcudart.so -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME ..`
 
+## Setup SSD MobileNet
+- Clone [mobilenet ssd] 
+ - Uncomment `engine: CAFFE` under `convolution_param` in every convolution layers in `*.prototxt`
+ - Run `demo.py` 
+
+[ssd]: https://github.com/weiliu89/caffe/tree/ssd
+[mobilenet ssd]: https://github.com/chuanqi305/MobileNet-SSD
 [cuda]: https://jin-zhe.github.io/guides/installing-caffe-with-cuda-on-anaconda/
 [caffe]: https://jin-zhe.github.io/guides/installing-caffe-with-cuda-on-anaconda/
 [build boost]: https://github.com/BVLC/caffe/issues/6043#issuecomment-423049323
