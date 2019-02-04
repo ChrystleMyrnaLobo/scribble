@@ -16,7 +16,7 @@ Setup [caffe]. Some changes I had to make
   - Find the version of the current boost lib. `conda list boost`
   - Download the boost lib source file with exactly the same version from https://www.boost.org/.
   - Compile boost with std=c++11 using: `b2 toolset=gcc cxxflags=”-std=c++11”`
-  - Copy the generated library to replace the original boost library: `cp boost-1.67.0/stage/lib/* ~/miniconda2/lib/`  
+  - Copy the generated library to replace the original boost library: `cp boost-1.67.0/stage/lib/* ~/anaconda3/lib/`  
 - In file `CMakeLists.txt` line 62 (or after the last 'set' of CMAKE_CXX_FLAG) add this line   
 `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")`
 - Modify `cmake` command as  
