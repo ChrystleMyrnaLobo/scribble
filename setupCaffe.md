@@ -1,7 +1,7 @@
-## Setup SSD mobilenet on caffe
+## Setup SSD MobileNet caffe
 - Clone [ssd] as ssd_caffe. This is forked from BVLC/caffe.
 - `git checkout caffe` on ssd_caffe
-- Build the code using cmake as below.
+- Build the code using cmake (refer the below section).
 - Clone [mobilenet ssd] 
  - Uncomment `engine: CAFFE` under `convolution_param` in every convolution layers in `*.prototxt`
  - Run `demo.py` 
@@ -11,7 +11,7 @@
 
 ## Caffe + Conda + Ubuntu + GPU + No admin access
 Setup cuda and cudnn w/o admin acess [cuda]  
-Setup caffe [caffe]. Some changes wrt to the link.
+Setup [caffe]. Some changes I had to make
 - gcc-5.x.x requires -std=c++11, but the boost lib in Debian system are built without such an option. So you need to build your own version of boost. [build boost]
   - Find the version of the current boost lib. `conda list boost`
   - Download the boost lib source file with exactly the same version from https://www.boost.org/.
