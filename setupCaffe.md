@@ -8,7 +8,7 @@
 - Use caffe branch `git checkout caffe` on ssd_caffe
 - Make build directory `mkdir build && cd build`
 
-## Set up Caffe
+## Setup Caffe
 - Create new conda env  
 ```
 conda create -n ssd python=2.7 anaconda
