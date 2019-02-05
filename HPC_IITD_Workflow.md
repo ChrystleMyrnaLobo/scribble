@@ -6,8 +6,9 @@ Disclaimer: This is very limited tutorial based on what I needed to get started.
 ## 1. Login via Kerberos (intranet only)
 - Open new terminal, `ssh mcs991234@hpc.iitd.ac.in`
 - Current working directory (command `pwd`) should be `/home/cse/mtech/mcs991234`
+- Passwordless ssh while working with [remote machines on network]
 
-## 2. Set up environment and internet access
+## 2. Set up environment and internet access (one-time)
 ### Default user environment
 Use the default user environment provided by HPC
 ```
@@ -24,7 +25,7 @@ chmod og-rx $SCRATCH
 chmod og-rx $HOME 
 ```
 
-### Internet access from login node
+### Internet access from login node (as per required)
 - Use CA certificate `export SSL_CERT_FILE=$HOME/mycerts/CCIITD-CA.crt`
 - Proxy login `lynx https://proxy62.iitd.ernet.in/cgi-bin/proxy.cgi` or open `firefox` and login to proxy.
 - Log in to HPC to *same* login node. Set env variables
@@ -32,6 +33,7 @@ chmod og-rx $HOME
 export http_proxy="http://10.10.78.62:3128/"
 export https_proxy="https://10.10.78.62:3128/"
 ```
+- More on [proxy]
 
 ## 3. Load softwares
 ### A. Use HPC-maintained software
@@ -48,11 +50,12 @@ export https_proxy="https://10.10.78.62:3128/"
 - Move directory `cat` to remote folder `~/dataset` using `scp -r cat mcs991234@hpc.iitd.ac.in:~/dataset`. 
 - Check the transfer at remote by `ls ~/dataset/cat`
 - Reverse steps to transfer from remote to local machine
+- More on working with [remote machines on network]
 
 ## 5. Use PBS
 - HPC uses PBS (portable batch system) for ditributed workload management. PBS accepts an executable shell script (aka job).
 ### Create job
-- Create a file `pbsbatch.sh` as [pbsbatch.sh](https://github.com/ChrystleMyrnaLobo/Trial/blob/master/pbsbatch.sh). Here showTFVersion.py is an executable python file.
+- Create a file `pbsbatch.sh` as [pbsbatch.sh]. Here showTFVersion.py is an executable python file.
 - Note the `qsub` options are mentioned in the shell script itself, to make a clean command line command.
 
 ### Submit job
@@ -65,3 +68,7 @@ export https_proxy="https://10.10.78.62:3128/"
 ### Reference:
 - http://supercomputing.iitd.ac.in/?access
 - http://supercomputing.iitd.ac.in/?pbs
+
+[proxy]:https://github.com/ChrystleMyrnaLobo/Trial/blob/master/IITD_proxy.md
+[pbsbatch.sh]:https://github.com/ChrystleMyrnaLobo/Trial/blob/master/pbsbatch.sh
+[remote machines on network]:https://github.com/ChrystleMyrnaLobo/Trial/blob/master/networkServer.md
