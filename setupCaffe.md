@@ -18,7 +18,7 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 - Download dependancies  
 `conda install lmdb openblas glog gflags hdf5 protobuf leveldb opencv cmake -y`
 - gcc-5.x.x requires -std=c++11, but the boost lib in Debian system are built without such an option. So you need to build your own version of boost. [build boost]
-  - Find the version of the current boost lib. `conda list boost`
+  - Find the version of the current boost lib.  (Try to conda install boost and see which version is resolved for the env).
   - Download the boost lib source file with exactly the same version from https://www.boost.org/.
   - Compile boost with std=c++11 using: `b2 toolset=gcc cxxflags=”-std=c++11”`
   - Copy the generated library to replace the original boost library: `cp boost-1.67.0/stage/lib/* ~/anaconda3/lib/`  
