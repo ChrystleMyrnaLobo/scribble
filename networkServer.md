@@ -33,3 +33,14 @@ rsync -avn foo_dir viz:~/downloads
 # actual data
 #rsync -avzh foo_dir viz:~/downloads
 ```
+
+## Temporary port forwarding
+- Redirect all connections to the portA on local to portB of server
+```
+ssh -L portA:remotenode:portB user@remotenode -N
+```
+- Open `http://localhost:portA/`
+- Specific example: Redirects all connections to the port 8080 on your local machine to 80 port of your remote machine. Access `http://192.168.0.10:8080/`
+```
+ssh -L 192.168.0.10:8080:10.0.0.10:80 root@10.0.0.10
+```
