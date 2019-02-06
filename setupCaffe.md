@@ -1,4 +1,5 @@
 # Caffe SSD MobileNet w/o root access
+Works for BVLC/caffe and its forked repo. I've tried it on [ssd] and [nvcaffe]
 
 ## Setup CUDA
 - Setup cuda and cudnn [cuda]
@@ -24,6 +25,7 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
   - Copy the generated library to replace the original boost library: `cp boost-1.67.0/stage/lib/* ~/anaconda3/lib/`  
 - In file `CMakeLists.txt` (after the last 'set' of CMAKE_CXX_FLAG around line 62) add this line   
 `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")`
+- If there are any unmet dependancies, use `conda` to install it.
 - Use `cmake`   
  ```
  cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH -DCUDA_CUDART_LIBRARY=$CUDA_HOME/lib64/libcudart.so -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME ..
@@ -43,3 +45,4 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 [cuda]: https://jin-zhe.github.io/guides/installing-caffe-with-cuda-on-anaconda/
 [caffe]: https://jin-zhe.github.io/guides/installing-caffe-with-cuda-on-anaconda/
 [build boost]: https://github.com/BVLC/caffe/issues/6043#issuecomment-423049323
+[nvcaffe]:https://github.com/NVIDIA/caffe
