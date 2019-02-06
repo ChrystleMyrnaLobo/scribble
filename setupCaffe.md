@@ -17,10 +17,10 @@ conda activate ssd
 export ENV_PATH=$HOME/anaconda3/envs/ssd
 ```
 - Download dependancies  
-`conda install lmdb openblas glog gflags hdf5 protobuf leveldb opencv cmake -y`
+`conda install lmdb openblas glog gflags hdf5 protobuf leveldb opencv cmake boost -y`
 - gcc-5.x.x requires -std=c++11, but the boost lib in Debian system are built without such an option. So you need to build your own version of boost. See build boost section below.
 - If there are any other unmet dependancies, use `conda` to install it.
-- In file `CMakeLists.txt` (after the last 'set' of CMAKE_CXX_FLAG around line 62) add this line   
+- In file `CMakeLists.txt` (after the last 'set' of CMAKE_CXX_FLAG around line 62) add this line (if not present)   
 `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")`
 - After `cmake`, check if the correct paths to libraries are picked   
  ```
@@ -41,7 +41,7 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 - Download the boost lib source file with exactly the same version from https://www.boost.org/.
 ### Manual [build boost]
 - Compile boost with std=c++11 using: `b2 toolset=gcc cxxflags=”-std=c++11”`
-- Copy the generated library to replace the original boost library: `cp boost-1.67.0/stage/lib/* ~/anaconda3/lib/`  
+- Copy the generated library to replace the original boost library: `cp boost-1.67.0/stage/lib/* ~/anaconda3/lib/`. The include headers will remain same
 ### Easy build and install [easy build]
 - From the unzipped folder, provide installation path via --prefix to install in /lib and /include
 ```
@@ -49,7 +49,8 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 ./bjam install
 ```
 ### Some issues
-CMake did not use my conda installation ([alternate boost]) from cmake flags. So I manually updated all boost path in `build/CMakeCache.txt` and ran without make clean.
+- For python 2.7, fix naming convention by soft link `ln -s ~/anaconda3/lib/libboost_python27.so ~/anaconda3/lib/libboost_python-py27.so`
+- CMake did not use my conda installation ([alternate boost]) from cmake flags. So I manually updated all boost path in `build/CMakeCache.txt` and ran without make clean.
 
 [ssd]: https://github.com/weiliu89/caffe/tree/ssd
 [mobilenet ssd]: https://github.com/chuanqi305/MobileNet-SSD
