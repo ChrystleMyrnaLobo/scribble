@@ -1,5 +1,4 @@
 # Caffe SSD MobileNet w/o root access
-Works for BVLC/caffe and its forked repo. I've tried it on [ssd] and [nvcaffe]
 
 ## Setup CUDA
 - Setup cuda and cudnn [cuda]
@@ -10,6 +9,7 @@ Works for BVLC/caffe and its forked repo. I've tried it on [ssd] and [nvcaffe]
 - Make build directory `mkdir build && cd build`
 
 ## Setup Caffe
+*Any BVLC/caffe forked repo should be similar. I've tried this on [ssd] and [nvcaffe].* 
 - Create new conda env  
 ```
 conda create -n ssd python=2.7 anaconda
