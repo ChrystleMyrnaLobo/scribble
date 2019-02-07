@@ -1,7 +1,7 @@
 # Working with networked machine
 Remote: server ip `10.1.2.3` and user `chrystle` alias as `viz`. Following commands are run from local  
 
-## Passworless SSH
+## Clean and neat SSH
 - File `/etc/hosts`, alias the hostname
 ```
 10.1.2.3 viz
@@ -27,15 +27,15 @@ scp -r foo_dir viz:~/downloads
 # Use foo_dir/ for content of foo_dir
 # Use foo_dir to copy the dir and contents within
 
-# dry run: 
+# dry run 
 rsync -avn foo_dir viz:~/downloads
 
-# actual data
+# actual data transfer
 #rsync -avzh foo_dir viz:~/downloads
 ```
 
 ## Temporary port forwarding
-- Redirect all connections to the portA on local to portB of server
+- Redirect connections to the portA on local to portB of server
 ```
 ssh -L portA:remotenode:portB user@remotenode -N
 ```
