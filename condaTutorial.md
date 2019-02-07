@@ -13,6 +13,27 @@ Deactivate `conda deactivate`
 - All envs `conda env list`
 - All packages in the curretly active env `conda list`
 
+## Set environment variables for env
+- In `anaconda3/envs/myenv`
+```
+mkdir -p ./etc/conda/activate.d
+mkdir -p ./etc/conda/deactivate.d
+touch ./etc/conda/activate.d/env_vars.sh
+touch ./etc/conda/deactivate.d/env_vars.sh
+```
+- Activate
+```
+#!/bin/sh
+
+export PYTHONPATH=$HOME/caffe/python:$PYTHONPATH
+```
+- Deativate
+```
+#!/bin/sh
+
+unset PYTHONPATH
+```
+
 ## Export environment
 Save the environment as  `conda env export > environment.yml`
 
