@@ -16,10 +16,9 @@ conda create -n ssd python=2.7 anaconda
 conda activate ssd
 export ENV_PATH=$HOME/anaconda3/envs/ssd
 ```
-- Download dependancies  
-`conda install lmdb openblas glog gflags hdf5 protobuf leveldb opencv cmake boost -y`
-- gcc-5.x.x requires -std=c++11, but the boost lib in Debian system are built without such an option. So you need to build your own version of boost. See build boost section below.
-- If there are any other unmet dependancies, use `conda` to install it.
+- Download dependancies via conda or build [from source] (see issues below)  
+`conda install cmake lmdb openblas leveldb opencv boost protobuf glog gflags hdf5 -y`
+- Install any other unmet dependancies
 - In file `CMakeLists.txt` (after the last 'set' of CMAKE_CXX_FLAG around line 62) add this line (if not present)   
 `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")`
 - After `cmake`, check if the correct paths to libraries are picked   
@@ -36,19 +35,21 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 - Uncomment `engine: CAFFE` under `convolution_param` in every convolution layers in `*.prototxt`
 - Run `demo.py` 
 
-## Build boost
+## Issues
+- I had to build protobuf and boost from source
+- gcc-5.x.x requires -std=c++11, but the boost lib are built without such an option. So I had to build my own version of boost.
+### Build boost
 - Find the version of the current boost lib.  (Try to conda install boost and see which version is resolved for the env).
 - Download the boost lib source file with exactly the same version from https://www.boost.org/.
-### Manual [build boost]
+1. Manual [build boost]
 - Compile boost with std=c++11 using: `b2 toolset=gcc cxxflags=”-std=c++11”`
 - Copy the generated library to replace the original boost library: `cp boost-1.67.0/stage/lib/* ~/anaconda3/lib/`. The include headers will remain same
-### Easy build and install [easy build]
+2. Easy build and install [easy build]
 - From the unzipped folder, provide installation path via --prefix to install in /lib and /include
 ```
 ./bootstrap.sh --prefix=~/anaconda3/
 ./bjam install
 ```
-### Some issues
 - For python 2.7, fix naming convention by soft link `ln -s ~/anaconda3/envs/nvc/lib/libboost_python27.so ~/anaconda3/envs/nvc/libboost_python-py27.so`
 - CMake did not use my conda installation ([alternate boost]) from cmake flags. So I manually updated all boost path in `build/CMakeCache.txt` and ran without make clean.
 
@@ -60,3 +61,4 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 [nvcaffe]:https://github.com/NVIDIA/caffe
 [easy build]:https://www.boost.org/doc/libs/1_46_1/more/getting_started/unix-variants.html#easy-build-and-install
 [alternate boost]:https://stackoverflow.com/questions/3016448/how-can-i-get-cmake-to-find-my-alternative-boost-installation
+[from source]:https://autchen.github.io/guides/2015/04/03/caffe-install.html
