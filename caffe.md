@@ -3,13 +3,13 @@
 ## Setup CUDA
 - Setup cuda and cudnn [cuda]
 
-## Setup SSD (a caffe fork)
+## Download repo
+*Any BVLC/caffe forked repo should be similar. I've tried this on [ssd] and [nvcaffe].* 
 - Clone [ssd] as ssd_caffe. This repo is forked from BVLC/caffe.
-- Use caffe branch `git checkout caffe` on ssd_caffe
+- Use caffe branch `git checkout caffe` on ssd_caffe (for SSD only)
 - Make build directory `mkdir build && cd build`
 
 ## Setup Caffe
-*Any BVLC/caffe forked repo should be similar. I've tried this on [ssd] and [nvcaffe].* 
 - Create new conda env  
 ```
 conda create -n ssd python=2.7 anaconda
