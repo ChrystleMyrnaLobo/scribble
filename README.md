@@ -1,8 +1,10 @@
 # Trial
 This repo is has some scribbles for common tasks I need. (Adventurous hitchhikers, use discretion)
-- `GitTutorial.md` some commonly used git commands which I apparently forget easily
-- `IITD_proxy.md` for proxy login into IITD intranet on ubuntu
-- `HPC_IITD_Workflow` consolidated step by step guide to use HPC at IITD. (In case, my future self forgets)
-- `OD.md` to setup Tensorflow object detection API on ubuntu
-- `pbsbatch.sh` sample script to submit to PBS of IITD HPC
-- `setupCaffe.sh` to setup caffe SSD mobilenet on ubuntu w/o sudo permission
+- `git.md` some commonly used git commands which I apparently forget easily
+- `proxy_iitd.md` for proxy login into IITD intranet on ubuntu
+- `hpc_iitd.md` consolidated step by step guide to use HPC at IITD. (In case, my future self forgets)
+- `OD.md` to setup Tensorflow object detection API
+- `caffe.md` to setup caffe (and its forks) w/o root permission
+- `conda.md` conda virtual environment
+- `networkServer.md` working with network server
+
