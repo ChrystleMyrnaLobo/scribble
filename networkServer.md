@@ -6,16 +6,15 @@ Remote: server ip `10.1.2.3` and user `chrystle` alias as `viz`. Following comma
 ```
 10.1.2.3 viz
 ```
-- File `~/.ssh`, mention user
+- File `~/.ssh/config`, mention user
 ```
 Host viz
 	User chrystle
 ```
-- For passwordless ssh, generate key-pairs 
-```
-ssh-keygen
-ssh-copy-id -i ~/.ssh/id_rsa.pub viz
-```
+- For passwordless ssh
+  - Generate key-pairs `ssh-keygen`. Keep defaults.
+  - Copy public key to server `ssh-copy-id -i ~/.ssh/id_rsa.pub viz`
+- Test login as `ssh viz`
 
 ## Sync files
 - Good old scp (secure copy)
