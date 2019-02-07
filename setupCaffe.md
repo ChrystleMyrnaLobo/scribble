@@ -50,7 +50,7 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 ./bootstrap.sh --prefix=~/anaconda3/
 ./bjam install
 ```
-- For python 2.7, fix naming convention by soft link `ln -s ~/anaconda3/envs/nvc/lib/libboost_python27.so ~/anaconda3/envs/nvc/libboost_python-py27.so`
+- For python 2.7, fix naming convention by soft link from `$ENV_PATH` as `ln -s lib/libboost_python27.so lib/libboost_python-py27.so`
 - CMake did not use my conda installation ([alternate boost]) from cmake flags. So I manually updated all boost path in `build/CMakeCache.txt` and ran without make clean.
 
 [ssd]: https://github.com/weiliu89/caffe/tree/ssd
