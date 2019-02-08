@@ -13,6 +13,12 @@ Deactivate `conda deactivate`
 - All envs `conda env list`
 - All packages in the curretly active env `conda list`
 
+## Install from list
+- Install from file but crashes on error  
+`conda install --yes --file requirements.txt`
+- Read from list, skip error  
+`while read requirement; do conda install --yes $requirement; done < requirements.txt`
+
 ## Set environment variables for env
 - In `anaconda3/envs/myenv`
 ```
