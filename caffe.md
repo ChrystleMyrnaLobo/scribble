@@ -28,7 +28,8 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
  make all -j 8
  make install
  ```
-- Export `export PYTHONPATH=$HOME/ssd_caffe/python:$PYTHONPATH`. Refer [caffe] to add to conda env.
+- Export `export PYTHONPATH=$HOME/ssd_caffe/python:$PYTHONPATH`. Refer [conda] to add to conda env vars.
+- Reference: [setup caffe without root]
 
 ## Setup SSD MobileNet
 - Clone [mobilenet ssd] 
@@ -56,9 +57,10 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 [ssd]: https://github.com/weiliu89/caffe/tree/ssd
 [mobilenet ssd]: https://github.com/chuanqi305/MobileNet-SSD
 [cuda]: https://jin-zhe.github.io/guides/installing-caffe-with-cuda-on-anaconda/
-[caffe]: https://jin-zhe.github.io/guides/installing-caffe-with-cuda-on-anaconda/
+[setup caffe without root]: https://jin-zhe.github.io/guides/installing-caffe-with-cuda-on-anaconda/
 [build boost]: https://github.com/BVLC/caffe/issues/6043#issuecomment-423049323
 [nvcaffe]:https://github.com/NVIDIA/caffe
 [easy build]:https://www.boost.org/doc/libs/1_46_1/more/getting_started/unix-variants.html#easy-build-and-install
 [alternate boost]:https://stackoverflow.com/questions/3016448/how-can-i-get-cmake-to-find-my-alternative-boost-installation
 [from source]:https://autchen.github.io/guides/2015/04/03/caffe-install.html
+[conda]:https://github.com/ChrystleMyrnaLobo/scribble/blob/master/conda.md
