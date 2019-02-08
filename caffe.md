@@ -1,15 +1,13 @@
 # Caffe SSD MobileNet w/o root access
 
-## Setup CUDA
+## 1. CUDA
 - Setup cuda and cudnn [cuda]
 
-## Download repo
-*Any BVLC/caffe forked repo should be similar. I've tried this on [ssd] and [nvcaffe].* 
-- Clone [ssd] as ssd_caffe. This repo is forked from BVLC/caffe.
-- Use caffe branch `git checkout caffe` on ssd_caffe (for SSD only)
+## 2. Caffe
+*Any BVLC/caffe forked repo should be similar. Following is for [ssd]. For [nvcaffe], see section on nvidia digits below* 
+- Clone [ssd] as ssd_caffe. This repo is forked from BVLC/caffe. 
+- Checkout the correct branch. For [ssd], `git checkout caffe`
 - Make build directory `mkdir build && cd build`
-
-## Setup Caffe
 - Create new conda env  
 ```
 conda create -n ssd python=2.7 anaconda
@@ -31,18 +29,14 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 - Export `export PYTHONPATH=$HOME/ssd_caffe/python:$PYTHONPATH`. Refer [conda] to add to conda env vars.
 - Reference: [setup caffe without root]
 
-## Setup SSD MobileNet
-- Clone [mobilenet ssd] 
-- Uncomment `engine: CAFFE` under `convolution_param` in every convolution layers in `*.prototxt`
-- Run `demo.py` 
-
+---
 ## Issues
 - I had to build protobuf and boost from source
 - gcc-5.x.x requires -std=c++11, but the boost lib are built without such an option. So I had to build my own version of boost.
 ### Build boost
-- Download the boost lib  from https://www.boost.org/. (Try to conda install boost and see which version is resolved for the env).
-- Easy build and install [easy build]:
-- From the unzipped folder, provide installation path via --prefix to install in /lib and /include/boost
+- Install boost `conda install boost` and check the version resolved by conda
+- Download the same version boost lib from https://www.boost.org/. Unzip.
+- Build from source ([easy build]) override the conda lib files via --prefix to install in /lib and /include/boost
 ```
 ./bootstrap.sh --prefix=~/anaconda3/
 ./bjam install
@@ -54,7 +48,7 @@ ln /home/chrystle/anaconda3/envs/nvd/lib/libboost_python27.so /home/chrystle/ana
 - CMake did not use my conda installation ([alternate boost]) from cmake flags. So I manually updated boost path in `build/CMakeCache.txt` and ran without `make clean`.
 
 ### Build protobuf
-- Install dependancy and make. Office site: [protobuf]
+- Install dependancy and make. Office site: [protobuf for digits]
 ```
 git clone https://github.com/google/protobuf.git
 conda install autoconf automake libtool
@@ -63,7 +57,40 @@ cd protobuf/
 ./configure --prefix=/home/chrystle/anaconda3/envs/nvd
 make 
 make install
+cd python
+python setup.py install --cpp_implementation
 ```
+
+***
+## SSD MobileNet
+- Clone [mobilenet ssd] 
+- Uncomment `engine: CAFFE` under `convolution_param` in every convolution layers in `*.prototxt`
+- Run `demo.py` 
+
+## Nvidia digits
+### Caffe dependancy
+- For [nvcaffe], before `cmake` install `conda install -c conda-forge libjpeg-turbo`
+- Build boost and protobuf from source
+- In ~/anaconda3/envs/nvcaffe/etc/conda/activate.d/env_vars.sh set `export CAFFE_ROOT=$HOME/MTP2/nvcaffe`
+- Check if caffe is installed correctly
+
+### Setup digits
+- Download repo [digits github]
+- Use conda to install all unmet in `digits/requirements.txt`
+```
+conda install -c anaconda gevent-websocket -y &&
+conda install -c anaconda flask-wtf -y &&
+conda install -c conda-forge flask-socketio -y &&
+conda install -c anaconda pydot -y &&
+conda install -c anaconda scikit-fmm -y &&
+conda install -c conda-forge python-magic -y
+```
+
+### Run
+Keep two terminals open
+- From remote, run the webapp `./digits-devserver`
+- From local, port forward `ssh -L 5000:10.208.23.220:5000 viz -N`
+- From local, open `localhost:5000`
 
 [ssd]: https://github.com/weiliu89/caffe/tree/ssd
 [mobilenet ssd]: https://github.com/chuanqi305/MobileNet-SSD
@@ -75,4 +102,5 @@ make install
 [alternate boost]:https://stackoverflow.com/questions/3016448/how-can-i-get-cmake-to-find-my-alternative-boost-installation
 [from source]:https://autchen.github.io/guides/2015/04/03/caffe-install.html
 [conda]:https://github.com/ChrystleMyrnaLobo/scribble/blob/master/conda.md
-[protobuf]:https://github.com/protocolbuffers/protobuf/blob/master/src/README.md
+[protobuf for digits]:https://github.com/NVIDIA/DIGITS/blob/master/docs/BuildProtobuf.md
+[digits github]: https://github.com/NVIDIA/DIGITS
