@@ -40,19 +40,30 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 - I had to build protobuf and boost from source
 - gcc-5.x.x requires -std=c++11, but the boost lib are built without such an option. So I had to build my own version of boost.
 ### Build boost
-- Find the version of the current boost lib.  (Try to conda install boost and see which version is resolved for the env).
-- Download the boost lib source file with exactly the same version from https://www.boost.org/.
-1. Manual [build boost]
-- Compile boost with std=c++11 using: `b2 toolset=gcc cxxflags=”-std=c++11”`
-- Copy the generated library to replace the original boost library: `cp boost-1.67.0/stage/lib/* ~/anaconda3/lib/`. The include headers will remain same
-2. Easy build and install [easy build]
-- From the unzipped folder, provide installation path via --prefix to install in /lib and /include
+- Download the boost lib  from https://www.boost.org/. (Try to conda install boost and see which version is resolved for the env).
+- Easy build and install [easy build]:
+- From the unzipped folder, provide installation path via --prefix to install in /lib and /include/boost
 ```
 ./bootstrap.sh --prefix=~/anaconda3/
 ./bjam install
+
+# For python 2.0, link if not present
+ln /home/chrystle/anaconda3/envs/nvd/lib/libboost_python27.so /home/chrystle/anaconda3/envs/nvd/lib/libboost_python-py27.so
 ```
-- For python 2.7, fix naming convention by linking files `ln /home/chrystle/anaconda3/envs/nvd/lib/libboost_python27.so /home/chrystle/anaconda3/envs/nvd/lib/libboost_python-py27.so`. Check if link is created
-- CMake did not use my conda installation ([alternate boost]) from cmake flags. So I manually updated all boost path in `build/CMakeCache.txt` and ran without make clean.
+- Alternatively, manually [build boost]
+- CMake did not use my conda installation ([alternate boost]) from cmake flags. So I manually updated boost path in `build/CMakeCache.txt` and ran without `make clean`.
+
+### Build protobuf
+- Install dependancy and make. Office site: [protobuf]
+```
+git clone https://github.com/google/protobuf.git
+conda install autoconf automake libtool
+cd protobuf/
+./autogen.sh
+./configure --prefix=/home/chrystle/anaconda3/envs/nvd
+make 
+make install
+```
 
 [ssd]: https://github.com/weiliu89/caffe/tree/ssd
 [mobilenet ssd]: https://github.com/chuanqi305/MobileNet-SSD
@@ -64,3 +75,4 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 [alternate boost]:https://stackoverflow.com/questions/3016448/how-can-i-get-cmake-to-find-my-alternative-boost-installation
 [from source]:https://autchen.github.io/guides/2015/04/03/caffe-install.html
 [conda]:https://github.com/ChrystleMyrnaLobo/scribble/blob/master/conda.md
+[protobuf]:https://github.com/protocolbuffers/protobuf/blob/master/src/README.md
