@@ -43,3 +43,11 @@ ssh -L portA:remotenode:portB user@remotenode -N
 ```
 ssh -L 192.168.0.10:8080:10.0.0.10:80 root@10.0.0.10
 ```
+
+## Pretty print env vars
+- Print each path on newline
+```
+sed 's/:/\n/g' <<< "$PATH"
+sed 's/:/\n/g' <<< "$LD_LIBRARY_PATH"
+```
+- I know this is not really a networked server senario.
