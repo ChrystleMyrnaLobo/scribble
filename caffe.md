@@ -31,6 +31,7 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 
 ---
 ## Issues
+- Before rebuilding, ensure all relevant files are removed from lib, include and bin folder
 - I had to build protobuf and boost from source
 - gcc-5.x.x requires -std=c++11, but the boost lib are built without such an option. So I had to build my own version of boost.
 ### Build boost
