@@ -68,6 +68,38 @@ python setup.py install --cpp_implementation
 - Uncomment `engine: CAFFE` under `convolution_param` in every convolution layers in `*.prototxt`
 - Run `demo.py` 
 
+### Working with SSD mobilenet
+- Convert data set into lmdb format
+- Setup model architecture `MobileNet-SSD/examples/MobileNetSSD_*.prototxt` 
+  - Update `data_param.source`, `annotated_data_param.label_map_file`
+  - For data augmentation, `transform_param` add `mirror: true` and `crop_size: 227`
+  - Add another data layer to compute validation loss in `MobileNetSSD_train.prototxt`
+- Visualize the model (and save as image) `$CAFFE_HOME/python/draw_net.py MobileNetSSD_train.prototxt img.png`
+- Setup solver (training params) `solver_*.prototxt`
+- Training or Fine tune  `-weights` and save the output log files
+```
+$CAFFE_HOME/build/tools/caffe train \
+-gpu 0 \
+-solver="solver_train.prototxt" \
+-weights="mobilenet_iter_73000.caffemodel" 2>&1 | tee -a log/foo.txt
+```
+- Vizualize loss while training. Needs setup.
+```
+python $CAFFE_HOME/tools/extra/plot_training_log.py 6 log/foo.png log/foo.log
+```
+- Parse log files 
+```
+python $CAFFE_HOME/tools/extra/parse_log.py log/$1 .
+```
+- Test on model `-weights`
+```
+$CAFFE_HOME/build/tools/caffe train \
+-solver="solver_test.prototxt" \
+-weights=mobilenet_iter_73000.caffemodel \
+-gpu 0 | tee -a log/foo.txt
+```
+- More at [caffe guide]
+
 ## Nvidia digits
 ### Caffe dependancy
 - For [nvcaffe], before `cmake` install `conda install -c conda-forge libjpeg-turbo`
@@ -105,3 +137,4 @@ Keep two terminals open
 [conda]:https://github.com/ChrystleMyrnaLobo/scribble/blob/master/conda.md
 [protobuf for digits]:https://github.com/NVIDIA/DIGITS/blob/master/docs/BuildProtobuf.md
 [digits github]: https://github.com/NVIDIA/DIGITS
+[caffe guide]:http://shengshuyang.github.io/A-step-by-step-guide-to-Caffe.html
