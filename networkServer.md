@@ -51,3 +51,20 @@ sed 's/:/\n/g' <<< "$PATH"
 sed 's/:/\n/g' <<< "$LD_LIBRARY_PATH"
 ```
 - I know this is not really a networked server senario.
+
+## Logging exectuions
+Log an execution (compute loss on test data for all snapshot models) and parse the log to make summary of run.
+- Use `2>&1 | tee output/log.txt` to intercept the data stream from stdout to the screen, and save it to a file
+- From log file, pick lines which have model name and loss via `grep`. Join two adjacent line together via `paste`. Using `awk` print the 7th and 18th field using the default delimiter of space.
+```
+grep -E 'Test net output|Finetuning' log/plot_test.log | paste -d " " - - | awk '/caffe.cpp/ { print $7 " "  $18}'  > log/summary.txt
+```
+- Sample output after grep
+```
+I0219 11:42:24.067281 25045 caffe.cpp:155] Finetuning from snapshot/mobilenet_plot_iter_10250.caffemodel
+I0219 11:46:02.713234 25045 solver.cpp:546]     Test net output #0: detection_eval = 0.606889
+```
+- More [parse log]
+
+
+[parse log]:https://www.loggly.com/ultimate-guide/analyzing-linux-logs/
