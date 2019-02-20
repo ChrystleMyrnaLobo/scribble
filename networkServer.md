@@ -57,7 +57,7 @@ Log an execution (compute loss on test data for all snapshot models) and parse t
 - Use `2>&1 | tee output/log.txt` to intercept the data stream from stdout to the screen, and save it to a file
 - From log file, pick lines which have model name and loss via `grep`. Join two adjacent line together via `paste`. Using `awk` print the 7th and 18th field using the default delimiter of space.
 ```
-grep -E 'Test net output|Finetuning' log/plot_test.log | paste -d " " - - | awk '/caffe.cpp/ { print $7 " "  $18}'  > log/summary.txt
+grep -E 'Test net output|Finetuning' log/plot_test.log | paste -d " " - - | awk '/caffe.cpp/ { print $7 ","  $18}'  > log/summary.csv
 ```
 - Sample output after grep
 ```
