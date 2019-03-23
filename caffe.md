@@ -1,7 +1,8 @@
 # Caffe SSD MobileNet w/o root access
 
 ## 1. CUDA
-- Setup cuda and cudnn  [cuda] and [caffe]
+- Setup cuda and cudnn[cuda] 
+- Files used cuda_9.0.176_384.81_linux.run and cudnn-9.0-linux-x64-v7.4.2.24.tgz
 
 ## 2. Caffe
 *Any BVLC/caffe forked repo should be similar. Following is for [ssd]. For [nvcaffe], see section on nvidia digits below* 
@@ -128,7 +129,6 @@ Keep two terminals open
 [ssd]: https://github.com/weiliu89/caffe/tree/ssd
 [mobilenet ssd]: https://github.com/chuanqi305/MobileNet-SSD
 [cuda]:https://jin-zhe.github.io/guides/getting-cudnn/
-[caffe]: https://jin-zhe.github.io/guides/installing-caffe-with-cuda-on-anaconda/
 [setup caffe without root]: https://jin-zhe.github.io/guides/installing-caffe-with-cuda-on-anaconda/
 [build boost]: https://github.com/BVLC/caffe/issues/6043#issuecomment-423049323
 [nvcaffe]:https://github.com/NVIDIA/caffe
