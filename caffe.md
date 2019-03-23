@@ -1,7 +1,7 @@
 # Caffe SSD MobileNet w/o root access
 
 ## 1. CUDA
-- Setup cuda and cudnn[cuda] 
+- Setup cuda and cudnn [cuda] 
 - Files used cuda_9.0.176_384.81_linux.run and cudnn-9.0-linux-x64-v7.4.2.24.tgz
 
 ## 2. Caffe
