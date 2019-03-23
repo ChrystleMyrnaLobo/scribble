@@ -1,13 +1,13 @@
 # Caffe SSD MobileNet w/o root access
 
 ## 1. CUDA
-- Setup cuda and cudnn [cuda] 
+- Setup cuda and cudnn. Refer [cuda] 
 - Files used cuda_9.0.176_384.81_linux.run and cudnn-9.0-linux-x64-v7.4.2.24.tgz
 
 ## 2. Caffe
 *Any BVLC/caffe forked repo should be similar. Following is for [ssd]. For [nvcaffe], see section on nvidia digits below* 
 - Clone [ssd] as ssd_caffe. This repo is forked from BVLC/caffe. 
-- Checkout the correct branch. For [ssd], `git checkout caffe`
+- Checkout the correct branch. For [ssd], `git checkout ssd`
 - Make build directory `mkdir build && cd build`
 - Create new conda env  
 ```
