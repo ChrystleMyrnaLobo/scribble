@@ -68,7 +68,8 @@ export https_proxy="https://10.10.78.62:3128/"
 ### Reference:
 - http://supercomputing.iitd.ac.in/?access
 - http://supercomputing.iitd.ac.in/?pbs
+- Not IITD resource, but is a better resource than the official one http://hpcugent.github.io/vsc_user_docs/pdf/intro-HPC-windows-gent.pdf
 
-[proxy]:https://github.com/ChrystleMyrnaLobo/Trial/blob/master/IITD_proxy.md
-[pbsbatch.sh]:https://github.com/ChrystleMyrnaLobo/Trial/blob/master/pbsbatch.sh
-[remote machines on network]:https://github.com/ChrystleMyrnaLobo/Trial/blob/master/networkServer.md
+[proxy]:https://github.com/ChrystleMyrnaLobo/scribble/blob/master/proxy_iitd.md
+[pbsbatch.sh]:https://github.com/ChrystleMyrnaLobo/scribble/blob/master/pbsbatch.sh
+[remote machines on network]:https://github.com/ChrystleMyrnaLobo/scribble/blob/master/networkServer.md
