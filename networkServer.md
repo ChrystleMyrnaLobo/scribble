@@ -59,7 +59,7 @@ I0219 11:46:02.713234 25045 solver.cpp:546]     Test net output #0: detection_ev
 - More [parse log]
 
 ## Install without root access
-- Install the software in user directory and update path correspondingly. Usually `PATH` and/or `LD_LIBRARY_PATH`
+- Install the software in user directory and update path correspondingly. `bin/` folder to `PATH` and/or `lib/`,`lib64/` folder to `LD_LIBRARY_PATH`
 - Pretty print env vars (print each path on newline)
 ```
 sed 's/:/\n/g' <<< "$PATH"
@@ -84,11 +84,12 @@ make install
 ```
 - Add to `~/.bashrc` for global use
 ```
+export GCC_HOME=$HOME/gcc
 export LD_LIBRARY_PATH=$GCC_HOME/lib64${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
 export LD_LIBRARY_PATH=$GCC_HOME/lib${LD_LIBRARY_PATH:+:${LD_LIBRARY_PATH}}
-
 export LD_RUN_PATH=$GCC_HOME/lib64${LD_RUN_PATH:+:${LD_RUN_PATH}}
 export LD_RUN_PATH=$GCC_HOME/lib${LD_RUN_PATH:+:${LD_RUN_PATH}}
+export PATH=$GCC_HOME/bin${PATH:+:${PATH}}
 ```
 - Refer [install gcc]
 
