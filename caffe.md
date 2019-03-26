@@ -20,13 +20,14 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 - Install any other unmet dependancies
 - In file `CMakeLists.txt` (after the last 'set' of CMAKE_CXX_FLAG around line 62) add this line (if not present)   
 `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")`
-- After `cmake`, check if the correct paths to libraries are picked   
+- After `cmake`, check if the correct paths to libraries are picked.   
  ```
- cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH -DCUDA_CUDART_LIBRARY=$CUDA_HOME/lib64/libcudart.so -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME ..
+ cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH -DCUDA_CUDART_LIBRARY=$CUDA_HOME/lib64/libcudart.so -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME ..  2>&1 | tee $HOME/cm.log 
  
- make all -j 8
+ make all -j 8  2>&1 | tee $HOME/mk.log 
  make install
  ```
+- In case of custom build of gcc use `-D CMAKE_C_COMPILER=$GCC_HOME/bin/gcc -D CMAKE_CXX_COMPILER=$GCC_HOME/bin/g++`
 - Export `export PYTHONPATH=$HOME/ssd_caffe/python:$PYTHONPATH`. Refer [conda] to add to conda env vars.
 - Reference: [setup caffe without root]
 
