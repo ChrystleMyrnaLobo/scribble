@@ -38,9 +38,13 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 - gcc-5.x.x requires -std=c++11, but the boost lib are built without such an option. So I had to build my own version of boost.
 ### Build boost
 - Install boost `conda install boost` and check the version resolved by conda
-- Download the same version boost lib from https://www.boost.org/. Unzip.
-- Build from source ([easy build]) override the conda lib files via --prefix to install in /lib and /include/boost
+- Download the same version boost lib from https://www.boost.org/.
+- Build from source ([easy build]) override the conda lib files via --prefix to install in /lib and /include/boost.
 ```
+cd ~/Downloads
+tar -xf  boost_1_67_0.tar.gz
+
+cd boost_1_67_0.tar
 ./bootstrap.sh --prefix=~/anaconda3/
 ./bjam install
 
