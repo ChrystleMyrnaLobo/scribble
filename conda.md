@@ -2,7 +2,7 @@
 Some common conda commands I frequently use (and yet forget)
 
 ## Create environment
-- Fresh env `conda create --name myenv`  
+- Fresh env `conda create --name myenv python=3.5`  
 - From `.yml` file `conda env create -f environment.yml`
 
 ## Use environment
