@@ -18,24 +18,50 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 - Download dependancies via conda or build [from source] (see issues below)  
 `conda install cmake lmdb openblas leveldb opencv boost protobuf glog gflags hdf5 -y`
 - Install any other unmet dependancies
-- In file `CMakeLists.txt` (after the last 'set' of CMAKE_CXX_FLAG around line 62) add this line (if not present)   
+- For gcc 5.5, in file `CMakeLists.txt` (after the last 'set' of CMAKE_CXX_FLAG around line 62) add this line (if not present)   
 `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")`
 - After `cmake`, check if the correct paths to libraries are picked.   
  ```
- cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH -DCUDA_CUDART_LIBRARY=$CUDA_HOME/lib64/libcudart.so -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME ..  2>&1 | tee $HOME/cm.log 
+cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH -DCUDA_CUDART_LIBRARY=$CUDA_HOME/lib64/libcudart.so -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME ..  2>&1 | tee $HOME/cm.log 
  
- make all -j 8  2>&1 | tee $HOME/mk.log 
- make install
- ```
-- In case of custom build of gcc use `-D CMAKE_C_COMPILER=$GCC_HOME/bin/gcc -D CMAKE_CXX_COMPILER=$GCC_HOME/bin/g++`
-- Export `export PYTHONPATH=$HOME/ssd_caffe/python:$PYTHONPATH`. Refer [conda] to add to conda env vars.
+make all -j 8 2>&1 | tee $HOME/mk.log 
+make install 2>&1 | tee $HOME/mi.log 
+make runtest 2>&1 | tee $HOME/mt.log 
+```
+- Set path in the enviroment
+```
+cd $HOME/anaconda3
+mkdir -p ./etc/conda/activate.d
+mkdir -p ./etc/conda/deactivate.d
+touch ./etc/conda/activate.d/env_vars.sh
+touch ./etc/conda/deactivate.d/env_vars.sh
+```
+- Set the path during conda activate activate.d/env_vars.h
+```
+#!/bin/sh
+
+export ENV_PATH=$HOME/anaconda3/envs/ssd
+export CAFFE_HOME=$HOME/MTP2/ssd_caffe
+export PYTHONPATH=$CAFFE_HOME/python:$PYTHONPATH
+```
+and unset during conda deactivate
+```
+#!/bin/sh
+
+unset ENV_PATH
+unset CAFFE_HOME
+unset PYTHONPATH
+```
 - Reference: [setup caffe without root]
 
 ---
 ## Issues
-- Before rebuilding, ensure all relevant files are removed from lib, include and bin folder
-- I had to build protobuf and boost from source
 - gcc-5.x.x requires -std=c++11, but the boost lib are built without such an option. So I had to build my own version of boost.
+- Before rebuilding, ensure all relevant files are removed from lib, include and bin folder
+- For digits, I had to build protobuf and boost from source
+- For ssd caffe, I had to build boost
+- On hpc, I had to set up gcc to 5.5, boost, protobuf, numpy version 1.15. Camke command changes as `cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH -DCUDA_CUDART_LIBRARY=$CUDA_HOME/lib64/libcudart.so -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME -D CMAKE_C_COMPILER=$GCC_HOME/bin/gcc -D CMAKE_CXX_COMPILER=$GCC_HOME/bin/g++ ..  2>&1 | tee $HOME/cm.log`   
+
 ### Build boost
 - Install boost `conda install boost` and check the version resolved by conda
 - Download the same version boost lib from https://www.boost.org/.
@@ -45,11 +71,11 @@ cd ~/Downloads
 tar -xf  boost_1_67_0.tar.gz
 
 cd boost_1_67_0.tar
-./bootstrap.sh --prefix=~/anaconda3/
+./bootstrap.sh --prefix=$ENV_PATH
 ./bjam install
 
 # For python 2.0, link if not present
-ln /home/chrystle/anaconda3/envs/nvd/lib/libboost_python27.so /home/chrystle/anaconda3/envs/nvd/lib/libboost_python-py27.so
+ln $ENV_PATH/lib/libboost_python27.so $ENV_PATH/lib/libboost_python-py27.so
 ```
 - Alternatively, manually [build boost]
 - CMake did not use my conda installation ([alternate boost]) from cmake flags. So I manually updated boost path in `build/CMakeCache.txt` and ran without `make clean`.
@@ -61,7 +87,7 @@ git clone https://github.com/google/protobuf.git
 conda install autoconf automake libtool
 cd protobuf/
 ./autogen.sh
-./configure --prefix=/home/chrystle/anaconda3/envs/nvd
+./configure --prefix=$ENV_PATH
 make 
 make install
 cd python
