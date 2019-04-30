@@ -5,11 +5,10 @@
 - Files used cuda_9.0.176_384.81_linux.run and cudnn-9.0-linux-x64-v7.4.2.24.tgz
 
 ## 2. Caffe
-*Any BVLC/caffe forked repo should be similar. Following is for [ssd]. For [nvcaffe], see section on nvidia digits below* 
-- Clone [ssd] as ssd_caffe. This repo is forked from BVLC/caffe. 
-- Checkout the correct branch. For [ssd], `git checkout ssd`
-- Make build directory `mkdir build && cd build`
-- Create new conda env  
+*Any BVLC/caffe forked repo should be similar. Following is for the [ssd] repo. For [nvcaffe] repo, see section on nvidia digits below* 
+- Clone the [ssd] repo as ssd_caffe. Note that this repo is forked from the original BVLC/caffe. Set this path to `$CAFFE_HOME`
+- Checkout the correct branch (if required). For [ssd], `git checkout ssd`
+- Setup the virtual env. For conda,  
 ```
 conda create -n ssd python=2.7 anaconda
 conda activate ssd
@@ -18,6 +17,11 @@ export ENV_PATH=$HOME/anaconda3/envs/ssd
 - Download dependancies via conda or build [from source] (see issues below)  
 `conda install cmake lmdb openblas leveldb opencv boost protobuf glog gflags hdf5 -y`
 - Install any other unmet dependancies
+- Setup the build env. 
+```
+cd $CAFFE_ROOT
+mkdir build && cd build
+```
 - For gcc 5.5, in file `CMakeLists.txt` (after the last 'set' of CMAKE_CXX_FLAG around line 62) add this line (if not present)   
 `set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++11")`
 - After `cmake`, check if the correct paths to libraries are picked.   
@@ -28,21 +32,24 @@ make all -j 8 2>&1 | tee $HOME/mk.log
 make install 2>&1 | tee $HOME/mi.log 
 make runtest 2>&1 | tee $HOME/mt.log 
 ```
-- Set path in the enviroment
+
+#### Update the env vars for this conda enviroment
 ```
-cd $HOME/anaconda3
+cd $ENV_PATH
 mkdir -p ./etc/conda/activate.d
 mkdir -p ./etc/conda/deactivate.d
 touch ./etc/conda/activate.d/env_vars.sh
 touch ./etc/conda/deactivate.d/env_vars.sh
 ```
-- Set the path during conda activate activate.d/env_vars.h
+- For conda activate, set the following vars using activate.d/env_vars.h
 ```
 #!/bin/sh
 
 export ENV_PATH=$HOME/anaconda3/envs/ssd
 export CAFFE_HOME=$HOME/MTP2/ssd_caffe
 export PYTHONPATH=$CAFFE_HOME/python:$PYTHONPATH
+export PKG_CONFIG_PATH=$ENV_PATH/lib/pkgconfig/
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ENV_PATH/lib/
 ```
 and unset during conda deactivate
 ```
@@ -51,6 +58,8 @@ and unset during conda deactivate
 unset ENV_PATH
 unset CAFFE_HOME
 unset PYTHONPATH
+unset PKG_CONFIG_PATH
+export LD_LIBRARY_PATH=/home/chrystle/cuda-9.0/lib64
 ```
 - Reference: [setup caffe without root]
 
@@ -60,7 +69,10 @@ unset PYTHONPATH
 - Before rebuilding, ensure all relevant files are removed from lib, include and bin folder
 - For digits, I had to build protobuf and boost from source
 - For ssd caffe, I had to build boost
-- On hpc, I had to set up gcc to 5.5, boost, protobuf, numpy version 1.15. Camke command changes as `cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH -DCUDA_CUDART_LIBRARY=$CUDA_HOME/lib64/libcudart.so -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME -D CMAKE_C_COMPILER=$GCC_HOME/bin/gcc -D CMAKE_CXX_COMPILER=$GCC_HOME/bin/g++ ..  2>&1 | tee $HOME/cm.log`   
+- On hpc, I had to set up gcc to 5.5, boost, protobuf, numpy version 1.15. Cmake command needs a `CMAKE_CXX_COMPILER` flag as below
+```
+cmake -DBLAS=open -DCUDNN_INCLUDE=$CUDA_HOME/include/ -DCUDNN_LIBRARY=$CUDA_HOME/lib64/libcudnn.so -DCMAKE_PREFIX_PATH=$ENV_PATH -DCMAKE_INSTALL_PREFIX=$ENV_PATH -DCUDA_CUDART_LIBRARY=$CUDA_HOME/lib64/libcudart.so -D CUDA_TOOLKIT_ROOT_DIR=$CUDA_HOME -D CMAKE_C_COMPILER=$GCC_HOME/bin/gcc -D CMAKE_CXX_COMPILER=$GCC_HOME/bin/g++ ..  2>&1 | tee $HOME/cm.log
+```   
 
 ### Build boost
 - Install boost `conda install boost` and check the version resolved by conda
