@@ -57,8 +57,31 @@ Used to ignore log files, build files `.pyc`, `.o` etc
 ### Merge Conflict (Please read)
 - https://www.git-tower.com/learn/git/ebook/en/command-line/advanced-topics/merge-conflicts
 
+
+## Working with a forked repo  
+Making an existing repo as your starting point 
+- For the repo on GitHub and clone the foked version repo 
+- Ensure the fetch and push path point correctly. I use origin as my forked repo and upstream as the original repo.
+```bash
+$ git remote -v
+> origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (fetch)
+> origin    https://github.com/YOUR_USERNAME/YOUR_FORK.git (push)
+> upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (fetch)
+> upstream  https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git (push)
+```
+- To update url of existing remote
+```
+git remote set-url origin https://github.com/USERNAME/REPOSITORY.git
+```
+- To add a new remote
+```
+git remote add upstream https://github.com/ORIGINAL_OWNER/ORIGINAL_REPOSITORY.git
+```
+
 ### References:
 - https://git-scm.com/book/en/v2/Git-Basics-Getting-a-Git-Repository
 - https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line/
 - https://github.com/desktop/desktop/issues/2789
 - https://help.github.com/articles/setting-your-username-in-git/
+- https://help.github.com/en/articles/fork-a-repo
+- https://help.github.com/en/articles/changing-a-remotes-url
