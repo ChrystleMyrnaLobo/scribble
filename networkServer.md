@@ -23,14 +23,20 @@ scp -r foo_dir viz:~/downloads
 ```
 - Faster rsync
 ```
-# Use foo_dir/ for content of foo_dir
-# Use foo_dir to copy the dir and contents within
+# Use foo_dir/ to copy content within foo_dir
+# Use foo_dir to copy the dir and the contents within it
 
 # dry run 
 rsync -avn foo_dir viz:~/downloads
 
 # actual data transfer
 #rsync -avzh foo_dir viz:~/downloads
+```
+
+## Disk space
+Top 10 directories which are using disk space
+```
+du -a $HOME | sort -n -r | head -n 10
 ```
 
 ## Temporary port forwarding
