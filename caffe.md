@@ -86,8 +86,10 @@ cd boost_1_67_0.tar
 ./bootstrap.sh --prefix=$ENV_PATH
 ./bjam install
 
-# For python 2.0, link if not present
-ln $ENV_PATH/lib/libboost_python27.so $ENV_PATH/lib/libboost_python-py27.so
+# For python 2.0, make appropriate links if not present 
+ln $ENV_PATH/lib/libboost_python27.so.1.67.0 $ENV_PATH/lib/libboost_python-py27.so 
+ln $ENV_PATH/lib/libboost_python27.so.1.67.0 $ENV_PATH/lib/libboost_python.so
+ln $ENV_PATH/lib/libboost_python27.so.1.67.0 $ENV_PATH/lib/libboost_python27.so
 ```
 - Alternatively, manually [build boost]
 - CMake did not use my conda installation ([alternate boost]) from cmake flags. So I manually updated boost path in `build/CMakeCache.txt` and ran without `make clean`.
