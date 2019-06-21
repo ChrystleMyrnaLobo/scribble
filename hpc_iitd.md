@@ -57,6 +57,11 @@ export https_proxy="https://10.10.78.62:3128/"
 ### Create job
 - Create a file `pbsbatch.sh` as [pbsbatch.sh]. Here showTFVersion.py is an executable python file.
 - Note the `qsub` options are mentioned in the shell script itself, to make a clean command line command.
+- Functions are not exported by default to be made available in subshells. To use conda inside a job script,
+```
+source ~/anaconda3/etc/profile.d/conda.sh
+conda activate ssd
+```
 
 ### Submit job
 - Make script executable `chmod +x pbsbatch.sh`
