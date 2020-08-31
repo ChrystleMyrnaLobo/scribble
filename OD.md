@@ -91,7 +91,7 @@ In a new folder for the dataset, set up workspace as follows
 - Images: Contains the images 
 - preTrainModel: Unziped content of the model chosen from model zoo  `tar -xzvf ssd_mobilenet_v1_coco.tar.gz`
 - training: The checkpoints generated during training will be stored here.
-- Copy `train.py`, `eval.py`, `export_inference_grap.py` from `model/research/object_detection/` to the folder
+- Copy `model_main.py` from `model/research/object_detection/` to the folder.
 
 ### Configure training pipeline
 - Create `label_map.pbtxt` in Data folder as (start index from 1)
@@ -105,28 +105,31 @@ item {
     name: 'cow'
 }
 ```
-- Copy the pipeline config `/master/research/object_detection/samples/configs/ssd_mobilenet_v1_coco.config` to training folder. Edit 
+- Copy the pipeline `pipeline.config` from the preTrainModel folder or use sample from `/master/research/object_detection/samples/configs/ssd_mobilenet_v1_coco.config` to training folder. Edit 
   - num_classes : as per label map file
   - fine_tune_checkpoint : to `model.ckpt` in preTrainedModel
   - train_input_reader, eval_input_reader : Path to training TFRecord file and label map file
   
-### Run
-- To run 
+### Tensorboard
+- Launch tensorboard and optionally specify the port (default 6006). Open browser to `http://127.0.0.1:6008`. 
 ```
-python train.py --logtostderr \
---train_dir=training/ \
---pipeline_config_path=training/ssd_inception_v2_coco.config
+tensorboard --logdir=/training  --port=6008
 ```
-Ctrl+C to stop.
-- To visualize training `tensorboard --logdir=training\`. Open `http://localhost:6006`.
-- Evaluate model
+- To view the Tensorboard on local machine, use local port forwarding i.e. use the -L option to transfer the port 6008 of the remote server into the port 16006 of local machine. Open browser to `http://127.0.0.1:16006`. 
 ```
-python eval.py --logtostderr \
---pipeline_config_path=training/ssd_inception_v2_coco.config \
---checkpoint_dir=training/ \
---eval_dir=eval
+ssh -L 16006:127.0.0.1:6008 remote_user@remote_host
 ```
-- To visualize
+
+### Train / Transfer learning
+- Use the tensorflow's train script to transfer learn. Specify the GPU using `CUDA_VISIBLE_DEVICES`.
+```
+export CUDA_VISIBLE_DEVICES=1
+
+python models/research/object_detection/model_main.py \
+    --pipeline_config_path=training/ssd_mobilenet_v2_coco.config \
+    --model_dir=training/
+```
+
 ### Export the model
 - Choose the appropriate checkpoint (here 13302) and export model
 ```
@@ -138,6 +141,24 @@ python export_inference_graph.py \
 ```
 - In the object detection code, change MODEL_NAME, PATH_TO_LABELS (path to label map file)  and NUM_CLASSES. Then run prediction
 
+### Legacy train scripts
+- Previous version used `train.py`, `eval.py`, `export_inference_grap.py` which are moved to `model/research/object_detection/legacy` folder
+```
+python train.py --logtostderr \
+--train_dir=training/ \
+--pipeline_config_path=training/ssd_inception_v2_coco.config
+```
+Ctrl+C to stop.
+- Evaluate model
+```
+python eval.py --logtostderr \
+--pipeline_config_path=training/ssd_inception_v2_coco.config \
+--checkpoint_dir=training/ \
+--eval_dir=eval
+```
+
 ### References
 - https://github.com/EdjeElectronics/TensorFlow-Object-Detection-API-Tutorial-Train-Multiple-Objects-Windows-10#4-generate-training-data
 - https://becominghuman.ai/tensorflow-object-detection-api-tutorial-training-and-evaluating-custom-object-detector-ed2594afcf73
+- https://towardsdatascience.com/detailed-tutorial-build-your-custom-real-time-object-detector-5ade1017fd2d
+- https://stackoverflow.com/questions/37987839/how-can-i-run-tensorboard-on-a-remote-server
