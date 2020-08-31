@@ -113,8 +113,9 @@ item {
 ### Tensorboard
 - Launch tensorboard and optionally specify the port (default 6006). Open browser to `http://127.0.0.1:6008`. 
 ```
-tensorboard --logdir=/training  --port=6008
+tensorboard --logdir=/training  --port=6008 &
 ```
+- Use the pid to kill the process `kill -15 18418`
 - To view the Tensorboard on local machine, use local port forwarding i.e. use the -L option to transfer the port 6008 of the remote server into the port 16006 of local machine. Open browser to `http://127.0.0.1:16006`. 
 ```
 ssh -L 16006:127.0.0.1:6008 remote_user@remote_host
@@ -129,6 +130,7 @@ python models/research/object_detection/model_main.py \
     --pipeline_config_path=training/ssd_mobilenet_v2_coco.config \
     --model_dir=training/
 ```
+Ctrl+C to stop. To resume training, use the same command. The latest checkpoints from model_dir will be used. 
 
 ### Export the model
 - Choose the appropriate checkpoint (here 13302) and export model
