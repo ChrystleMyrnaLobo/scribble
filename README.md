@@ -1,4 +1,4 @@
-# Trial
+# Scribble
 This repo is has some scribbles for common tasks I need. (Adventurous hitchhikers, use discretion)
 - `git.md` some commonly used git commands which I apparently forget easily
 - `proxy_iitd.md` for proxy login into IITD intranet on ubuntu
